@@ -1,0 +1,62 @@
+{% block title %}
+{% endblock %}
+
+{% block content %}
+
+<b>Please answer the following understanding questions:</b><br />
+<p>
+<p>Your task is to award a bonus payment of {{ C.bonus_payment }} to one of two workers.<br>
+<input type="radio" name="check_task" value="True">
+<label for="true">True</label><br>
+<input type="radio" name="check_task"  value="False">
+<label for="false">False</label><br>
+</p></p>
+{{ formfield_errors 'check_task' }}
+
+
+
+<p>
+<p>Your payment does not depend on your decisions.<br>
+<input type="radio" name="check_payment_task" value="True">
+<label for="true">True</label><br>
+<input type="radio" name="check_payment_task"  value="False">
+<label for="false">False</label><br>
+</p></p>
+  {{ formfield_errors 'check_payment_task' }}
+
+
+
+<p>
+<p>In each decision, you will decide between a worker from group <b style="color:rgb(3, 166, 3)">Green</b> and a worker from group <b style="color:orange">Orange</b>.<br/>
+  <input type="radio" name="check_worker" value="True">
+  <label for="true">True</label><br>
+  <input type="radio" name="check_worker"  value="False">
+  <label for="false">False</label><br>
+</p></p>
+  {{ formfield_errors 'check_worker' }}
+
+
+
+<p>For each decision you will also be presented with the decision of a middle manager, who is either from group <b style="color:rgb(3, 166, 3)">Green</b> or <b>neutral</b>.<br/>
+  <input type="radio" name="check_middlemanager" value="True">
+  <label for="true">True</label><br>
+  <input type="radio" name="check_middlemanager"  value="False">
+  <label for="false">False</label><br>
+  </p></p>
+    {{ formfield_errors 'check_middlemanager' }}
+
+
+
+<p>What is your group?<br/>
+  <input type="radio" name="check_group" value="Green" required>
+  <label for="Green"><b style="color:rgb(3, 166, 3)">Green</b></label><br>
+  <input type="radio" name="check_group"  value="Orange">
+  <label for="Orange"><b style="color:orange">Orange</b></label><br>
+  </p></p>
+    {{ formfield_errors 'check_group' }}
+  <br/>
+    {% next_button %}
+
+
+
+{% endblock %}

@@ -1,0 +1,81 @@
+
+{{ block title }}
+Your Task
+{{ endblock }}
+
+{{ block content }}
+
+
+{{ if participant.group == "Green" }}
+<div style="position:relative">
+<div style="position: absolute; top: -50px; right: 0px; background-color: white; color: black; padding: 5px 10px; border-radius: 5px; border: 2px solid green; display: flex; align-items: center;">
+    <div style="width: 10px; height: 10px; background-color: green; border-radius: 50%; margin-right: 5px;"></div>
+    <span style="color: green;">Your Group: {{ participant.group }}</span>
+</div>
+</div>
+{{ else}}
+<div style="position:relative">
+<div style="position: absolute; top: -50px; right: 0px; background-color: white; color: black; padding: 5px 10px; border-radius: 5px; border: 2px solid orange; display: flex; align-items: center;">
+        <div style="width: 10px; height: 10px; background-color: orange; border-radius: 50%; margin-right: 5px;"></div>
+    <span style="color: orange;">Your Group: {{ participant.group }}</span>
+</div>
+</div>
+{{ endif }}
+
+<p>
+    It is your task choose one of these {{C.NUM_WORKERS}} workers that will be presented to you.
+    The selected worker will then receive a bonus payment of {{ C.bonus_payment }}.</p>
+</p>
+<p>
+    In a previous round of the study, the middle managers already made similar (but slightly different) selection decisions:
+     they saw the workers' group memberships and decided which worker should receive a bonus payment of {{ C.bonus_payment_stage1 }}.
+     As seen on the previous page, you will be presented with the decision of one of these middle managers (marked by a yellow star).
+</p>
+<p>
+    <b>Remember:</b> these middle managers had previously been allocated to either group {{ if participant.group == "Green" }}
+    <span style="color: green;"><b>{{ participant.group }}</b></span>
+    {{ elif participant.group == "Green" }}
+    <span style="color: orange;"><b>{{ participant.group }}</b></span>
+    {{ endif}} or remained <b>neutral</b>, i.e. have not been assigned to any of the two groups. 
+</p>
+<p>
+    Note the following about the behavior of the middle manager:
+    <ul>
+        <!--<li>middle managers from group <span style="color: orange;"><b>Orange</b></span> have predominantly picked the <span style="color: orange;"><b>Orange</b></span> worker,</li>-->
+        <li>middle managers from group <span style="color: green;"><b>Green</b></span> have always picked the <span style="color: green;"><b>Green</b></span> worker,</li>
+        <li>middle managers who remained <b>neutral</b> have randomly picked one or the other worker.
+    </ul>
+</p>
+
+{% if treatment == "full_certainty" %}
+<p>
+    For your decisions, you will be shown the group membership of the middle manager from the previous round. This allows you to infer the group memberships of the workers.
+</p>
+{% elif treatment == "uncertainty" %}
+<p>
+    For your decisions, you will be not be shown the group membership of the middle manager from the previous round.
+</p>
+{% elif treatment == "strategic_uncertainty" %}
+<p>
+    For your decisions, you will get the option to reveal the group membership of the middle manager from the previous round.
+</p>
+{% endif %}
+<br>
+ <!--
+ <p>
+    To determine the final bonus payment for a worker, a random draw will determine whether your decision or the decision of a manager from the previous round is used and paid out to that worker.
+    For the payout, each point is converted into a monetary payment of {{C.conversion_rate}} cent.
+</p>
+-->
+<h4> Your Payment: </h4>
+<p>
+    Your own payment does <b>not</b> depend on your decisions in this task.
+    You will receive a fixed participation fee of {{C.bonus_payment}} irrespective of which worker you assign the bonus payment to.
+</p>
+<p>
+    On the next page you will be asked a few questions about the previous information to make sure that you have read and understood the task before we start.
+</p>
+<br>
+    {{ next_button }}
+
+{{ endblock }}

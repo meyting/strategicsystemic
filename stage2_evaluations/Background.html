@@ -1,0 +1,154 @@
+{{ block title }}
+Background
+{{ endblock }}
+{{ block content }}
+
+
+{{ if participant.group == "Green" }}
+<div style="position:relative">
+<div style="position: absolute; top: -50px; right: 0px; background-color: white; color: black; padding: 5px 10px; border-radius: 5px; border: 2px solid green; display: flex; align-items: center;">
+    <div style="width: 10px; height: 10px; background-color: green; border-radius: 50%; margin-right: 5px;"></div>
+    <span style="color: green;">Your Group: {{ participant.group }}</span>
+</div>
+</div>
+{{ else}}
+<div style="position:relative">
+<div style="position: absolute; top: -50px; right: 0px; background-color: white; color: black; padding: 5px 10px; border-radius: 5px; border: 2px solid orange; display: flex; align-items: center;">
+        <div style="width: 10px; height: 10px; background-color: orange; border-radius: 50%; margin-right: 5px;"></div>
+    <span style="color: orange;">Your Group: {{ participant.group }}</span>
+</div>
+</div>
+{{ endif }}
+
+<p>
+    On each of the next pages, you will be presented with {{C.NUM_WORKERS}} different workers from the first study, one worker from group <span style="color: orange;"><b>Orange</b></span> and one worker from group <span style="color: green;"><b>Green</b></span>. 
+    However, it will not be visible which worker belongs to which group. Instead, workers will be presented to you like this:
+</p>
+<div class="profiles">
+    <div class="profileleft">
+    <div id="bordermiddle"></div>
+    <div class="profilecontent">
+        <div class="avatar center">
+            <img class="avatarimg" src="{% static "avatar/neutral.png" %}" />
+        </div>
+        <div style="display: flex; justify-content: center;">
+            <b><u>Worker 1</u></b>
+        </div>       
+    </div>
+    </div>
+    
+    
+    <div class="profileright">
+    <div class="profilecontent">
+        <div class="avatar center">
+            <img class="avatarimg_star" src="{% static "avatar/neutral_star.png" %}" />
+        </div>
+        <div style="display: flex; justify-content: center;">
+            <b><u>Worker 2</u></b>
+        </div> 
+    </div>
+    </div>
+</div>
+<br>
+    <p>
+        Note that one worker is marked by a yellow star.
+        This star marks the worker that has been picked by a middle manager from the previous round (see details on the next page).
+    </p>
+<br>
+    {{ next_button }}
+
+{{ endblock }}
+
+
+
+{{ block styles }}
+<style>
+
+.profiles{
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+     }
+
+    .profiles .profileleft{
+        border-right: 2px solid gray;
+        height: 100%;
+        width: 50%;
+        overflow: hidden;
+        float: left;
+        padding-right: 30px;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+    }
+
+
+    .profiles .profileright{
+        height: 100%;
+        width: 50%;
+        overflow: hidden;
+        float:right;
+        padding-left: 30px;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+    }
+
+    .profilecontent{
+        position: relative;
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+    }
+
+
+    .profilecontent .avatar{
+        position:relative;
+        width:  100%;
+        height: 100%;
+        overflow: hidden;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 50px;
+    }
+    
+    .vertical-line{
+            height: 50%;
+            }
+    
+   
+    .divBox{
+            margin-top: 80px;
+            margin-bottom: 5px;
+        }
+    
+    .display{
+            visibility: visible;
+            }
+
+    .avatar .avatarimg{
+        position: relative;
+        width: 80px;
+        height: 90px;
+        float:left;
+        overflow: hidden;
+    }
+
+    .avatar .avatarimg_star{
+        position: relative;
+        width: 75px;
+        height: 90px;
+        float:left;
+        overflow: hidden;
+    }
+</style>
+{{ endblock }}
+
+{{ block scripts }}
+{{ endblock }}

@@ -1,0 +1,168 @@
+{{ block title }}
+    Groups
+{{ endblock }}
+{{ block content }}
+
+<p> 
+    In this study, you will participate in an artificial job market. 
+    Participants of a previous study have also been part of this job market.
+    They have either been assigned to the roles of <b>Workers</b> or <b>Middle Managers</b>.
+    You have now been assigned to the role of <b>Top Manager</b>.
+</p>
+<hr>
+<p>
+    <b>Workers</b> have been divided into two groups at the beginning of the previous study. These groups
+    are:
+</p>
+<table width="40%">
+    <tr>
+        <th> Group Orange </th>
+       <th width="20px"> </th>
+        <th> Group Green  </th>
+    </tr>
+        <td>
+            <span style="display: inline-block; width: 60px; height: 60px; border-radius: 50%; background-color: orange; margin-left: 5px;"></span>
+        </td>
+    <td width="20px"> </td>
+        <td>
+            <span style="display: inline-block; width: 60px; height: 60px; border-radius: 50%; background-color: green; margin-left: 5px;"></span>
+        </td>
+    </tr>
+</table> <br>
+
+<p>
+    <b>Middle managers</b> have either been assigned to group {{ if participant.group == "Green" }}
+    <span style="color: green;"><b>{{ participant.group }}</b></span>
+    {{ elif participant.group == "Green" }}
+    <span style="color: orange;"><b>{{ participant.group }}</b></span>
+    {{ endif}} or remained <b>neutral</b>, i.e. have not been assigned to any of the two groups.
+</p>
+<p>
+    <b>You</b> have now also been assigned to one of the two groups, <span style="color: orange;"><b>Orange</b></span> or <span style="color: green;"><b>Green</b></span>.
+    You stay a member of your group for the entire duration of the study.
+</p>
+
+<hr>
+
+ Click the button below to find out your own group membership for this study:
+
+    <p id="container">
+<b class="openbox" id="openbox">
+    <br>
+    <button type="button" class="button_normal"> Show group membership </button>
+</b> </p>
+<div class="infobox hidden" id="infobox">
+<br>
+    {{ if participant.group == "Orange" }}
+    <div class="groupO-info-box">
+<table>
+    <tr>
+        <td style="font-size:22px">
+                You are a member of group <b style="color: orange"> Orange</b>.
+        </td>
+        <td width="30px"></td>
+        <td>
+            <span style="display: inline-block; width: 60px; height: 60px; border-radius: 50%; background-color: orange; margin-left: 5px;"></span>
+        </td>
+    </tr>
+</table>
+        </div>
+    {{ else }}
+    <div class="groupG-info-box">
+<table>
+    <tr>
+        <td style="font-size:22px">
+                You are a member of group <b style="color: green"> Green</b>.
+        </td>
+        <td width="30px"></td>
+        <td>
+            <span style="display: inline-block; width: 60px; height: 60px; border-radius: 50%; background-color: green; margin-left: 5px;"></span>
+        </td>
+    </tr>
+</table>
+        </div>
+    {{ endif }}
+<br>
+    {{ next_button }}
+
+</div>
+
+{{ endblock }}
+
+{{ block styles }}
+<style>
+    table {
+    margin: auto;
+}
+
+td, th {
+        text-align: center;
+    }
+
+    .orange-circle {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background-color: orange;
+        margin-left: 5px;
+    }
+
+    .hidden {
+	display:none;
+}
+
+
+
+.openbox {
+        cursor: pointer;
+		margin: 15px 0;
+		  }
+
+
+.button_normal{
+    background-color: grey;
+    border: none;
+    border-radius: 7px;
+    color: white;
+    padding: 7px 14px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    position: relative;
+}
+
+.groupO-info-box {
+        border: 2px solid orange;
+        padding: 10px;
+        border-radius: 10px;
+        margin: 10px 0;
+    }
+
+    .groupG-info-box {
+        border: 2px solid green;
+        padding: 10px;
+        border-radius: 10px;
+        margin: 10px 0;
+    }
+
+.group-info-box {
+        border: 2px solid orange;
+        padding: 10px;
+        border-radius: 10px;
+        margin: 10px 0;
+    }
+</style>
+{{ endblock }}
+
+{{ block scripts }}
+<script>
+    document.getElementById("openbox").addEventListener("click", function(){
+    document.getElementById("infobox").classList.remove("hidden");
+    document.getElementById("container").classList.add("hidden");
+    });
+</script>
+{{ endblock }}

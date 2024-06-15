@@ -1,0 +1,321 @@
+{% block title %}
+{% endblock %}
+
+{% block content %}
+{{ if participant.group == "Green" }}
+<div style="position:relative">
+<div style="position: absolute; top: 0px; right: -120px; background-color: white; color: black; padding: 5px 10px; border-radius: 5px; border: 2px solid green; display: flex; align-items: center;">
+    <div style="width: 10px; height: 10px; background-color: green; border-radius: 50%; margin-right: 5px;"></div>
+    <span style="color: green;">Your Group: {{ participant.group }}</span>
+</div>
+</div>
+{{ else}}
+<div style="position:relative">
+<div style="position: absolute; top: 0px; right: -120px; background-color: white; color: black; padding: 5px 10px; border-radius: 5px; border: 2px solid orange; display: flex; align-items: center;">
+        <div style="width: 10px; height: 10px; background-color: orange; border-radius: 50%; margin-right: 5px;"></div>
+    <span style="color: orange;">Your Group: {{ participant.group }}</span>
+</div>
+</div>
+{{ endif }}
+
+
+
+<h3 class="center">Decisions about Bonus Payments
+</h3>
+<p style="text-align: center; font-size:16px;">
+
+<i>  
+    Please click on the worker who you want to receive the bonus payment ({{C.bonus_payment}}).<br>
+    (The selection decisions of the middle manager is indicated by a yellow star attached to the worker that the middle manager selected.)</i>
+</p>
+<br>
+{{ if treatment == "full_certainty" }}
+<form>
+    <div class="profiles">
+    <div class="profileleft">
+    <div id="bordermiddle"></div>
+    <div class="profilecontent">
+        <div class="avatar center">
+            <img class="avatarimg" src="{% static "avatar/circle.jpg" %}" />
+        </div>
+        <div style="display: flex; justify-content: center;">
+            <b><u>Worker 1</u></b>
+        </div>       
+    </div>
+    </div>
+    
+    
+    <div class="profileright">
+    <div class="profilecontent">
+        <div class="avatar center">
+                <img class="avatarimg" src="{% static "avatar/circle.jpg" %}" />
+        </div>
+        <div style="display: flex; justify-content: center;">
+            <b><u>Worker 2</u></b>
+        </div> 
+    </div>
+    </div>
+    </div>
+</form>
+
+
+{{ elif treatment == "medium_certainty" }}
+<form>
+    <div class="profiles">
+    <div class="profileleft">
+    <div id="bordermiddle"></div>
+    <div class="profilecontent">
+        <div class="avatar center">
+            <img class="avatarimg" src="{% static "avatar/circle.jpg" %}" />
+        </div>
+        <div style="display: flex; justify-content: center;">
+            <b><u>Worker 1</u></b>
+        </div>       
+    </div>
+    </div>
+    
+    
+    <div class="profileright">
+    <div class="profilecontent">
+        <div class="avatar center">
+                <img class="avatarimg" src="{% static "avatar/circle.jpg" %}" />
+        </div>
+        <div style="display: flex; justify-content: center;">
+            <b><u>Worker 2</u></b>
+        </div> 
+    </div>
+    </div>
+    </div>
+</form>
+
+{{ elif treatment == "uncertainty" }}
+<form>
+    <div class="profiles">
+    <div class="profileleft">
+    <div id="bordermiddle"></div>
+    <div class="profilecontent">
+        <div class="avatar center">
+            <img class="avatarimg" src="{% static "avatar/circle.jpg" %}" />
+        </div>
+        <div style="display: flex; justify-content: center;">
+            <b><u>Worker 1</u></b>
+        </div>       
+    </div>
+    </div>
+    
+    
+    <div class="profileright">
+    <div class="profilecontent">
+        <div class="avatar center">
+                <img class="avatarimg" src="{% static "avatar/circle.jpg" %}" />
+        </div>
+        <div style="display: flex; justify-content: center;">
+            <b><u>Worker 2</u></b>
+        </div> 
+    </div>
+    </div>
+    </div>
+</form>
+    
+{{ elif treatment == "strategicuncertainty" }}
+<form>
+    <div class="profiles">
+    <div class="profileleft">
+    <div id="bordermiddle"></div>
+    <div class="profilecontent">
+        <div class="avatar center">
+            <img class="avatarimg" src="{% static "avatar/circle.jpg" %}" />
+        </div>
+        <div style="display: flex; justify-content: center;">
+            <b><u>Worker 1</u></b>
+        </div>       
+    </div>
+    </div>
+    
+    
+    <div class="profileright">
+    <div class="profilecontent">
+        <div class="avatar center">
+                <img class="avatarimg" src="{% static "avatar/circle.jpg" %}" />
+        </div>
+        <div style="display: flex; justify-content: center;">
+            <b><u>Worker 2</u></b>
+        </div> 
+    </div>
+    </div>
+    </div>
+</form>
+
+<div id="button_container" class="button-container">
+        <div  id="reveal_container" style="height:35px; display: inline;">
+        <button type="button" id="reveal" class="reveal" onclick="showinfo3(task1info); countclicks(this.id)" align="center";> Click here if you want to see the middle managers' group </button>
+        </div>
+    <input type="hidden" name="reveal_example" value="{{reveal_example}}" disabled id="reveal_example" class="hidden-input"/>
+            </div>
+{{ endif }}
+
+
+<input type="hidden" name="offer1" value="{{profile_id1}}" id="offer1" class="hidden-input"/>
+<input type="hidden" name="offer2" value="{{profile_id2}}" id="offer2" class="hidden-input"/>
+<input type="hidden" name="group1" value="{{group1}}" id="group1" class="hidden-input"/>
+<input type="hidden" name="group2" value="{{group2}}" id="group2" class="hidden-input"/>
+<input type="hidden" name="score1" value="{{score1}}" id="score1" class="hidden-input"/>
+<input type="hidden" name="score2" value="{{score2}}" id="score2" class="hidden-input"/>
+<input type="hidden" name="signal1" value="{{signal1}}" id="signal1" class="hidden-input"/>
+<input type="hidden" name="signal2" value="{{signal2}}" id="signal2" class="hidden-input"/>
+
+
+<br>
+
+<div class="center">
+    <button id="next-button" class="button_next" disabled>Next</button>
+</div>
+
+    {% endblock %}
+
+
+
+
+
+
+{% block styles %}
+<style type="text/css">
+    .profiles{
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+     }
+
+    .profiles .profileleft{
+        border-right: 2px solid gray;
+        height: 100%;
+        width: 50%;
+        overflow: hidden;
+        float: left;
+        padding-right: 30px;
+    }
+
+
+    .profiles .profileright{
+        height: 100%;
+        width: 50%;
+        overflow: hidden;
+        float:right;
+        padding-left: 30px;
+
+    }
+
+    .profilecontent{
+        position: relative;
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+    }
+
+
+    .profilecontent .workers{
+        position:relative;
+        float: left;
+        width:100%;
+        height: 130px;
+        margin-left: 90px;
+        overflow: hidden;
+    }
+
+
+label > input{ /* HIDE RADIO */
+  visibility: hidden; /* Makes input not-clickable */
+  position: absolute; /* Remove input from document flow */
+}
+label > input + .profilecontent{ /* IMAGE STYLES */
+  cursor:pointer;
+  border:8px solid transparent;
+}
+label > input:checked + .profilecontent{ /* (RADIO CHECKED) IMAGE STYLES */
+  border:8px solid #0d6efd;
+}
+
+
+    .center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 50px;
+    }
+    
+    .vertical-line{
+            height: 50%;
+            }
+    
+   
+    .divBox{
+            margin-top: 80px;
+            margin-bottom: 5px;
+        }
+    
+    .display{
+            visibility: visible;
+            }
+
+    .avatar .avatarimg{
+        position: relative;
+        width: 50px;
+        height: 50px;
+        float:left;
+        overflow: hidden;
+    }
+
+    .avatarimg_info{
+        display:inline;
+        width: 100%;
+        height: 100%;
+        margin-bottom:0.5%;
+        overflow: hidden;
+    }
+    
+
+  
+</style>
+
+{% endblock %}
+
+
+{% block scripts %}
+
+<script>
+let nextButton = document.getElementById('next-button');
+
+//function activateSlider(elementID) {
+//    document.getElementById("bonus-split").classList.remove('notclicked');
+//    enableNextButton();
+//}
+
+// Function to enable the next button
+function enablenextbutton() {
+    nextButton.disabled = false;
+    nextButton.classList.remove('disabled-button');
+    nextButton.classList.add('enabled-button')
+    nextButton.classList.add('btn-primary');
+    nextButton.classList.add('otree-btn-next');
+    nextButton.classList.add('btn');
+}
+
+
+
+function countclicks(clicked_id) {
+            if (clicked_id === "reveal") {
+            document.getElementById("reveal_example").value++;
+            }
+        }
+        function showinfo3(taskinfo) {
+            document.getElementById("button_container").classList.add("button-clicked");
+            document.getElementById("task1info").style.display = "inline";
+            document.getElementById("task2info").style.display = "block";
+            document.getElementById("button_container").style.display = "none";
+    }
+
+</script>
+
+
+
+{% endblock %}

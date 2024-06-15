@@ -1,0 +1,77 @@
+{% extends "global/Page.html" %}
+{% load otree static %}
+
+{% block title %}
+ Careful!
+{% endblock %}
+
+{% block content %}
+
+<p><b>Question(s) answered incorrectly:</b></p>
+<hr />
+{% if player.check_task_correct == False %}
+    <p>Your task is to award a bonus payment of {{ C.bonus_payment }} to one of two workers.</p>
+    <p style="color:black">Your answer: <b>{{ player.check_task }}</b></p>
+    <p style="color:black"> Correct answer:  <b>{{ C.check_task_answer }}</b> </p>
+    <p> Remember, you will be asked to pick one of two workers and the selected worker will receive a bonuspayment of {{ C.bonus_payment }}.
+    </p>
+<hr />
+{% endif %}
+
+{% if player.check_payment_task_correct == False %}
+    <p>Your payment does not depend on the decisions about the bonus wages of the workers.</p>
+    <p style="color:rblacked">Your answer:  <b>{{ player.check_payment_task }}</b></p>
+    <p style="color:black"> Correct answer:  <b>{{ C.check_payment_task_answer }}</b> </p>
+    <p> Remember, you receive the fixed payment of {{C.bonus_payment}} regardless of your decisions.
+    </p>
+    <hr />
+{% endif %}
+
+{% if player.check_worker_correct == False %}
+    <p>In each decision, you will decide between a worker from group <b style="color:rgb(3, 166, 3)">Green</b> and a worker from group <b style="color:orange">Orange</b>.</p>
+    <p style="color:black">Your answer:  <b>{{ player.check_worker }}</b></p>
+    <p style="color:black"> Correct answer:  <b>{{ C.check_worker_answer }}</b> </p>
+    <p> Remember, one worker will be from group <b style="color:rgb(3, 166, 3)">Green</b> and the other worker will be from group <b style="color:orange">Orange</b>.
+        However, the respective group memberships will not be visible.
+     </p>
+<hr />
+{% endif %}
+
+{% if player.check_middlemanager_correct == False %}
+    <p>For each decision you will also be presented with the decision of a middle manager, who is either from group <b style="color:rgb(3, 166, 3)">Green</b> or <b>neutral</b>.</p>
+    <p style="color:black">Your answer:  <b>{{ player.check_middlemanager }}</b></p>
+    <p style="color:black"> Correct answer:  <b>{{ C.check_middlemanager_answer }}</b> </p>
+    <p> Remember, one of the workers will be marked by a yellow star. This is the worker that has been selected to receive a small bonus of {{ C.bonus_payment_stage1 }} by the middle manager.
+        All middle managers are either from group <b style="color:rgb(3, 166, 3)">Green</b> or have not been assigned any group and are therefore <b>neutral</b>.
+     </p>
+<hr />
+{% endif %}
+
+{% if player.check_group_correct == False %}
+    <p>What is your group membership?</p>
+    <p style="color:black">Your answer: {{ if player.check_group == "Orange" }}
+        <b style="color:orange">{{ player.check_group}}</b>
+        {{ elif player.check_group == "Green" }}
+        <b style="color:green">{{ player.check_group}}</b>
+    {{ endif }}</p>
+{{ if participant.group == "Orange" }}
+    <p style="color:black"> Correct answer: <b style="color:orange">Orange</b>.</p>
+    {{ elif participant.group == "Green" }}
+    <p style="color:black"> Correct answer: <b style="color:green">Green</b>.</p>
+{{ endif }}
+<p> Remember, you are a member of group {{ if participant.group == "Orange" }}
+    <b style="color:orange">Orange</b>.</p>
+    {{ elif participant.group == "Green" }}
+    <b style="color:green">Green</b>.</p>
+{{ endif }}
+<hr />
+{{ endif }}
+
+
+<p>
+    Please make sure that you have understood your mistake(s). 
+    Then, please click "Next" to evaluate the first {{C.NUM_WORKERS}} workers.
+</p>
+    {% next_button %}
+
+{% endblock %}

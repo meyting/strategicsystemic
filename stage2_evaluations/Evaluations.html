@@ -1,0 +1,469 @@
+{% block title %}
+{% endblock %}
+
+{% block content %}
+{{ if participant.group == "Green" }}
+<div class="center">
+<div class="owngroup">
+    <div style="width: 10px; height: 10px; background-color: green; border-radius: 50%; margin-right: 5px;"></div>
+    <span style="color: green;">Your Group: {{ participant.group }}</span>
+</div>
+</div>
+{{ else}}
+<div style="position:relative">
+<div style="position: absolute; top: 0px; right: 0px; background-color: white; color: black; padding: 5px 10px; border-radius: 5px; border: 2px solid orange; display: flex; align-items: center;">
+        <div style="width: 10px; height: 10px; background-color: orange; border-radius: 50%; margin-right: 5px;"></div>
+    <span style="color: orange;">Your Group: {{ participant.group }}</span>
+</div>
+</div>
+{{ endif }}
+
+<br>
+
+<p style="text-align: center; font-size:16px;">
+<i>  
+   (Please click on the worker you want to award the bonus payment of {{C.bonus_payment}} to.)
+</i>
+<hr>   
+
+{{ if treatment == "full_certainty" }}
+<p class="center">
+    The middle manager from the previous round has selected {{ if signal1 == profile_id1 }} worker 1{{ elif signal1 == profile_id2 }} worker 2{{ endif }}.
+</p>
+<p class="center">
+    The middle manager is a member of group&nbsp;
+    {{ if eval_color1 == "green" }}
+    <b style="color: green;">{{ eval_color1 }}</b>.
+    {{ elif eval_color1 == "orange" }}
+    <b style="color: orange;">{{ eval_color1 }}</b>.
+    {{ endif }}
+</p>
+<br>
+<form>
+    <div class="profiles">
+    <div class="profileleft">
+    <div id="bordermiddle"></div>
+    <label for="d1">
+        {{i1 | safe}}
+    <div class="profilecontent">
+        <div class="avatar center">
+            {{ if signal1 == profile_id1 }}
+            <img class="avatarimg_star" src="{% static "avatar/neutral_star.png" %}" />
+            {{ elif signal1 == profile_id2 }}
+            <img class="avatarimg" src="{% static "avatar/neutral.png" %}" />
+            {{ endif }}
+        </div>
+        <div style="display: flex; justify-content: center;">
+            <b><u>Worker 1</u></b>
+        </div>       
+    </div>
+    </label>
+    </div>
+    
+    
+    <div class="profileright">
+        <label for="d2">
+            {{i2 | safe}}
+    <div class="profilecontent">
+        <div class="avatar center">
+            {{ if signal2 == profile_id2 }}
+            <img class="avatarimg_star" src="{% static "avatar/neutral_star.png" %}" />
+            {{ elif signal2 == profile_id1 }}
+            <img class="avatarimg" src="{% static "avatar/neutral.png" %}" />
+            {{ endif }}
+        </div>
+        <div style="display: flex; justify-content: center;">
+            <b><u>Worker 2</u></b>
+        </div> 
+    </div>
+    </label>
+    </div>
+    </div>
+</form>
+
+
+
+
+{{ elif treatment == "uncertainty" }}
+<p class="center">
+    The middle manager from the previous round has selected {{ if signal1 == profile_id1 }} worker 1{{ elif signal1 == profile_id2 }} worker 2{{ endif }}. 
+</p>
+<br>
+<form>
+    <div class="profiles">
+    <div class="profileleft">
+    <div id="bordermiddle"></div>
+    <label for="d1">
+        {{i1 | safe}}
+    <div class="profilecontent">
+        <div class="avatar center">
+            {{ if signal1 == profile_id1 }}
+            <img class="avatarimg_star" src="{% static "avatar/neutral_star.png" %}" />
+            {{ elif signal1 == profile_id2 }}
+            <img class="avatarimg" src="{% static "avatar/neutral.png" %}" />
+            {{ endif }} 
+        </div>
+        <div style="display: flex; justify-content: center;">
+            <b><u>Worker 1</u></b>
+        </div>       
+    </div>
+    </label>
+    </div>
+    
+    
+    <div class="profileright">
+        <label for="d2">
+            {{i2 | safe}}
+    <div class="profilecontent">
+        <div class="avatar center">
+            {{ if signal2 == profile_id2 }}
+            <img class="avatarimg_star" src="{% static "avatar/neutral_star.png" %}" />
+            {{ elif signal2 == profile_id1 }}
+            <img class="avatarimg" src="{% static "avatar/neutral.png" %}" />
+            {{ endif }}
+        </div>
+        <div style="display: flex; justify-content: center;">
+            <b><u>Worker 2</u></b>
+        </div> 
+    </div>
+    </label>
+    </div>
+    </div>
+</form>
+    
+
+
+{{ elif treatment == "strategic_uncertainty" }}
+<p class="center">
+    The middle manager from the previous round has selected {{ if signal1 == profile_id1 }} worker 1 {{ elif signal1 == profile_id2 }} worker 2{{ endif }}.
+</p>
+<p class="center" style="display:none"; id="middlemanagercolor">
+    The middle manager is a member of group&nbsp; 
+    {{ if eval_color1 == "green" }}
+    <span style="color: green;"><b>{{ eval_color1 }}</b></span>,
+    {{ elif eval_color1 == "orange" }}
+    <span style="color: orange;"><b> {{ eval_color1 }}</b></span>,
+    {{ endif }}
+</p>
+<div id="button_container" class="button-container center">
+    <div  id="reveal_container" style="height:35px; display: inline;">
+    <button type="button" id="reveal" class="showbutton" onclick="showinfo(middlemanagercolor); countclicks(this.id)" align="center";> Click here if you want to see the middle managers' group </button>
+    </div>
+</div>
+<br>
+<form>
+    <div class="profiles">
+    <div class="profileleft">
+    <div id="bordermiddle"></div>
+    <label for="d1">
+        {{i1 | safe}}
+    <div class="profilecontent">
+        <div class="avatar center">
+            {{ if signal1 == profile_id1 }}
+            <img class="avatarimg_star" src="{% static "avatar/neutral_star.png" %}" />
+            {{ elif signal1 == profile_id2 }}
+            <img class="avatarimg" src="{% static "avatar/neutral.png" %}" />
+            {{ endif }}
+        </div>
+        <div style="display: flex; justify-content: center;">
+            <b><u>Worker 1</u></b>
+        </div>       
+    </div>
+    </label>
+    </div>
+    
+    
+    <div class="profileright">
+        <label for="d2">
+            {{i2 | safe}}
+    <div class="profilecontent">
+        <div class="avatar center">
+            {{ if signal2 == profile_id2 }}
+            <img class="avatarimg_star" src="{% static "avatar/neutral_star.png" %}" />
+            {{ elif signal2 == profile_id1 }}
+            <img class="avatarimg" src="{% static "avatar/neutral.png" %}" />
+            {{ endif }}        
+        </div>
+        <div style="display: flex; justify-content: center;">
+            <b><u>Worker 2</u></b>
+        </div> 
+    </div>
+    </label>
+    </div>
+    </div>
+</form>
+
+
+{{ endif }}
+
+
+<input type="hidden" name="offer1" value="{{profile_id1}}" id="offer1" class="hidden-input"/>
+<input type="hidden" name="offer2" value="{{profile_id2}}" id="offer2" class="hidden-input"/>
+<input type="hidden" name="group1" value="{{group1}}" id="group1" class="hidden-input"/>
+<input type="hidden" name="group2" value="{{group2}}" id="group2" class="hidden-input"/>
+<input type="hidden" name="score1" value="{{score1}}" id="score1" class="hidden-input"/>
+<input type="hidden" name="score2" value="{{score2}}" id="score2" class="hidden-input"/>
+<input type="hidden" name="signal1" value="{{signal1}}" id="signal1" class="hidden-input"/>
+<input type="hidden" name="signal2" value="{{signal2}}" id="signal2" class="hidden-input"/>
+<input type="hidden" name="reveal" value="{{reveal}}" id="reveal" class="hidden-input"/>
+
+
+<br>
+
+<div class="center">
+    <button id="next-button" class="button_next" disabled>Next</button>
+</div>
+<br>
+<p class="center"><i>(Decision {{ round_number }} of {{ C.NUM_ROUNDS}})</i></p>
+
+    {% endblock %}
+
+
+
+
+
+
+{% block styles %}
+<style type="text/css">
+    .owngroup {
+        width:20%;
+        background-color: white;
+        color: black;
+        padding: 5px 10px;
+        border-radius: 5px;
+        border: 2px solid green;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 50px;
+    }
+
+    .profiles{
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+     }
+
+    .profiles .profileleft{
+        border-right: 2px solid gray;
+        height: 100%;
+        width: 50%;
+        overflow: hidden;
+        float: left;
+        padding-right: 30px;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+    }
+
+
+    .profiles .profileright{
+        height: 100%;
+        width: 50%;
+        overflow: hidden;
+        float:right;
+        padding-left: 30px;
+        justify-content: center;
+        align-items: center;
+        display: flex;
+    }
+
+    .profilecontent{
+        position: relative;
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+    }
+
+
+    .profilecontent .avatar{
+        position:relative;
+        width:  100%;
+        height: 100%;
+        overflow: hidden;
+        justify-content: center;
+        align-items: center;
+    }
+
+
+label > input{ /* HIDE RADIO */
+  visibility: hidden; /* Makes input not-clickable */
+  position: absolute; /* Remove input from document flow */
+}
+label > input + .profilecontent{ /* IMAGE STYLES */
+  cursor:pointer;
+  border:8px solid transparent;
+}
+label > input:checked + .profilecontent{ /* (RADIO CHECKED) IMAGE STYLES */
+  border:8px solid #0d6efd;
+  padding: 5px;
+}
+
+    .showbutton {
+        background-color: rgb(234, 235, 235);
+        color: black;
+        border: white;
+        border-radius: 15px;
+        padding: 5px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+
+    .button-container {
+        background-color: transparent;
+        border-radius: 2px;
+    }
+
+    .button-container.button-clicked {
+        border-color: transparent;
+    }
+
+    .center {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .vertical-line{
+            height: 50%;
+            }
+    
+   
+    .divBox{
+            margin-top: 80px;
+            margin-bottom: 5px;
+        }
+    
+    .display{
+            visibility: visible;
+            }
+
+    .avatar .avatarimg{
+        position: relative;
+        width: 80px;
+        height: 90px;
+        float:left;
+        overflow: hidden;
+    }
+
+    .avatar .avatarimg_star{
+        position: relative;
+        width: 75px;
+        height: 90px;
+        float:left;
+        overflow: hidden;
+    }
+
+    .avatarimg_info{
+        display:inline;
+        width: 100%;
+        height: 100%;
+        margin-bottom:0.5%;
+        overflow: hidden;
+    }
+    
+
+  
+</style>
+
+{% endblock %}
+
+
+{% block scripts %}
+
+<script>
+let nextButton = document.getElementById('next-button');
+
+//function activateSlider(elementID) {
+//    document.getElementById("bonus-split").classList.remove('notclicked');
+//    enableNextButton();
+//}
+
+// Function to enable the next button
+function enablenextbutton() {
+    nextButton.disabled = false;
+    nextButton.classList.remove('disabled-button');
+    nextButton.classList.add('enabled-button')
+    nextButton.classList.add('btn-primary');
+    nextButton.classList.add('otree-btn-next');
+    nextButton.classList.add('btn');
+}
+
+
+
+function countclicks(clicked_id) {
+            if (clicked_id === "reveal") {
+            document.getElementById("reveal").value++;
+            }
+        }
+        function showinfo(middlemanagercolor) {
+            document.getElementById("button_container").classList.add("button-clicked");
+            document.getElementById("middlemanagercolor").style.display = "flex";
+            document.getElementById("button_container").style.display = "none";
+    }
+
+</script>
+
+
+<!--
+{{ elif treatment == "medium_certainty" }}
+<i>  
+    Please click on the worker you want to award the bonus payment ({{C.bonus_payment}}) to.<br>
+    (The yellow star is attached to the worker who was selected by the middle manager.
+     The middle manager is a member of group 
+     {{ if participant.group == "Green" }}
+     <span style="color: green;"><b>{{ participant.group }}</b></span>.)
+     {{ else}}
+     <span style="color: orange;"><b>{{ participant.group }}</b></span>.) 
+     {{ endif}}
+</i>
+</p>
+<br>
+<form>
+    <div class="profiles">
+    <div class="profileleft">
+    <div id="bordermiddle"></div>
+    <label for="d1">
+        {{i1 | safe}}
+    <div class="profilecontent">
+        <div class="avatar center">
+            {{ if group1 == "green" }}
+            <img class="avatarimg_star" src="{% static "avatar/circle_star.jpg" %}" />
+            {{ elif group1 == "orange" }}
+            <img class="avatarimg" src="{% static "avatar/circle.jpg" %}" />
+            {{ endif }}
+        </div>
+        <br>
+        <div style="display: flex; justify-content: center;">
+            <b><u>Worker 1</u></b>
+        </div>       
+    </div>
+    </label>
+    </div>
+    
+    
+    <div class="profileright">
+        <label for="d2">
+            {{i2 | safe}}
+    <div class="profilecontent">
+        <div class="avatar center">
+            {{ if group2 == "green" }}
+            <img class="avatarimg_star" src="{% static "avatar/circle_star.jpg" %}" />
+            {{ elif group2 == "orange" }}
+            <img class="avatarimg" src="{% static "avatar/circle.jpg" %}" />
+            {{ endif }}
+        </div>
+        <br>
+        <div style="display: flex; justify-content: center;">
+            <b><u>Worker 2</u></b>
+        </div> 
+    </div>
+    </label>
+    </div>
+    </div>
+</form>
+-->
+{% endblock %}
+
+
+

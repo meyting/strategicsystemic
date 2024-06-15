@@ -1,0 +1,28 @@
+{% block title %}
+{% endblock %}
+
+{% block content %}
+
+{{ if participant.group == "Green" }}
+<div style="position:relative">
+<div style="position: absolute; top: -50px; right: 0px; background-color: white; color: black; padding: 5px 10px; border-radius: 5px; border: 2px solid green; display: flex; align-items: center;">
+    <div style="width: 10px; height: 10px; background-color: green; border-radius: 50%; margin-right: 5px;"></div>
+    <span style="color: green;">Your Group: {{ participant.group }}</span>
+</div>
+</div>
+{{ else}}
+<div style="position:relative">
+<div style="position: absolute; top: -50px; right: 0px; background-color: white; color: black; padding: 5px 10px; border-radius: 5px; border: 2px solid orange; display: flex; align-items: center;">
+        <div style="width: 10px; height: 10px; background-color: orange; border-radius: 50%; margin-right: 5px;"></div>
+    <span style="color: orange;">Your Group: {{ participant.group }}</span>
+</div>
+</div>
+{{ endif }}
+
+    <p>
+        Well done! The task begins on the next page. Please click "Next" to consider the first {{C.NUM_WORKERS}} workers.
+    </p>
+
+    {% next_button %}
+
+{% endblock %}
